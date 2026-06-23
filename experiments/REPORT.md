@@ -302,27 +302,28 @@ python experiments/exp6_interpreter.py         # needs served Qwen; ~45 s
 python experiments/demo.py                      # end-to-end demo; needs served Qwen
 python experiments/demo.py "hold the left edge" # ...or type your own order
 python experiments/build_report.py             # build the self-contained web report.html
-bash experiments/serve_report.sh               # serve privately on 127.0.0.1:8899 (SSH-tunnel to view)
+python experiments/build_report.py --publish   # ...and copy it to ../world-commander-bench/motion.html
+bash experiments/serve_report.sh               # optional local preview (127.0.0.1:8899, SSH-tunnel)
 ```
 
 Web report follows the world-commander-bench convention (self-contained `report.html`, interactive
-replay, `noindex`/members-only). Served **privately** via `serve_report.sh` (127.0.0.1 + SSH tunnel)
-or private GitLab Pages (`.gitlab-ci.yml`). Public Pages publishing is retired (it caused a GitHub
-suspension on 2026-06-20).
+replay, `noindex`/members-only). It is published as **Crowd Motion (E4)** on the shared
+world-commander-bench Pages hub: `build_report.py --publish` copies it to that repo's `motion.html`,
+then commit + push the bench repo (gitlab remote) to deploy. `serve_report.sh` is for local preview
+only. Public Pages publishing is retired (it caused a GitHub suspension on 2026-06-20).
 
-## 6. Working-tree changes (for review — not committed)
+## 6. Status — committed & published
 
-```
- M mca/commands.py          flank command + KINDS
- M mca/language.py          RealParaphraser fixed for reasoning models + seeds + flank
- M mca/metrics.py           formation_error, completion_time
- M tests/test_mca.py        +7 tests (flank, metrics, interpreter, JSON parse)
- ?? mca/interpret.py        NEW — component [A]: LLM + keyword interpreters (+ coordinate guard)
- ?? requirements-experiments.txt   NEW — matplotlib/pillow (kept out of core)
- ?? .gitlab-ci.yml          NEW — private GitLab Pages deploy (members-only)
- ?? experiments/            NEW — common.py + 6 experiments + viz + demo + REPORT.md
-                                  + build_report.py / serve_report.sh / report.html + results/ + figures/
-```
+All of the above is committed to `world-commander-motion` `main` and pushed (gitlab). The report is
+published as **Crowd Motion (E4)** on the shared world-commander-bench Pages hub (`motion.html`),
+reachable from the switcher in every report. What landed:
 
-No commits were made. Suggested next action for review: skim `mca/interpret.py` and E6, then
-decide whether to commit the core extensions + harness.
+- core: `flank` + `KINDS`; `formation_error` / `completion_time`; `mca/interpret.py` (component [A]
+  LLM + keyword interpreters with the coordinate guard); the `RealParaphraser` reasoning-model fix.
+- `experiments/`: `common.py` + E1–E6 + `viz.py` + `demo.py` + `REPORT.md` + `build_report.py`
+  (`--publish`) + `serve_report.sh` + `report.html`; PNG figures + result JSONs committed; GIFs and
+  the venv gitignored.
+- `requirements-experiments.txt`; tests 11/11.
+
+The standalone motion Pages site was retired (its `.gitlab-ci.yml` removed); publishing now goes
+through the bench hub.

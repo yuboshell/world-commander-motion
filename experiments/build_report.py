@@ -5,12 +5,16 @@ interactive replay viewer, sections of intro -> figure -> table -> caption, metr
 definitions, and a members-only/noindex private page. Numbers are read from the JSONs
 the experiments wrote (experiments/results/*.json); figures are reused from figures/.
 
-    python experiments/build_report.py        # writes experiments/report.html
+    python experiments/build_report.py            # writes experiments/report.html
+    python experiments/build_report.py --publish  # also copy -> ../world-commander-bench/motion.html
 
-Serve it privately with experiments/serve_report.sh (127.0.0.1) over an SSH tunnel —
-never a public host (public Pages publishing is retired; it caused a GitHub suspension)."""
+The report is published as "Crowd Motion (E4)" on the shared world-commander-bench Pages hub:
+--publish copies it to that repo's motion.html; commit + push the bench repo (gitlab remote) to
+deploy. For a local preview use serve_report.sh (127.0.0.1 + SSH tunnel) — never a public host
+(public Pages publishing is retired; it caused a GitHub suspension)."""
 from __future__ import annotations
 
+import argparse
 import base64
 import io
 import json
@@ -198,6 +202,10 @@ def sections():
 
 # ----------------------------------------------------------------------------- assemble
 def main():
+    ap = argparse.ArgumentParser(description="build the self-contained crowd-motion report.html")
+    ap.add_argument("--publish", action="store_true",
+                    help="also copy report.html into the bench repo as motion.html (the shared hub)")
+    publish = ap.parse_args().publish
     generated = time.strftime("%Y-%m-%d, %I:%M %p %Z")
     replays = {k: crowd_frames(k) for k in ORDER}
     print(f"  rendered replay frames for {len(replays)} commands")
@@ -264,8 +272,7 @@ def main():
   footer {{ margin-top:3rem; color:#777; font-size:.82rem; border-top:1px solid #eee; padding-top:.6rem; }}
 </style></head>
 <body>
-<div style="font-size:.9rem;color:#666;border-bottom:1px solid #eee;padding-bottom:.6rem;margin-bottom:1rem">
-World Commander program · <b>Crowd Motion track (v0 de-risk)</b></div>
+<div style="font-size:.9rem;color:#666;border-bottom:1px solid #eee;padding-bottom:.6rem;margin-bottom:1rem">Reports: <a href="index.html">Grid Arena (E1)</a> &middot; <a href="sc2.html">StarCraft II (E2)</a> &middot; <a href="embodiment.html">Embodiment (E3)</a> &middot; <b>Crowd Motion (E4)</b></div>
 <h1>{TITLE}</h1>
 <p class="hint">Free-form natural-language command → coordinated crowd motion, synthetic-data pipeline.
 Tests the two riskiest assumptions before any GPU training.</p>
@@ -355,6 +362,14 @@ run on the served Qwen. Self-contained report (images + replay frames embedded);
 </body></html>"""
     OUT.write_text(html)
     print(f"wrote {OUT.relative_to(ROOT.parent)}  ({len(html) / 1e6:.1f} MB)")
+    if publish:
+        dest = ROOT.parent.parent / "world-commander-bench" / "motion.html"
+        if dest.parent.exists():
+            dest.write_bytes(OUT.read_bytes())
+            print(f"published -> {dest}\n  next: (cd {dest.parent} && git add motion.html && "
+                  "git commit -m 'update motion report' && git push gitlab main)")
+        else:
+            print(f"--publish: bench repo not found at {dest.parent} (skipped)")
 
 
 if __name__ == "__main__":
