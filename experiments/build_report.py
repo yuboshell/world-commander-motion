@@ -265,7 +265,7 @@ def main():
 </style></head>
 <body>
 <div style="font-size:.9rem;color:#666;border-bottom:1px solid #eee;padding-bottom:.6rem;margin-bottom:1rem">
-World Commander program · <b>Crowd Motion track (v0 de-risk)</b> · the dual-aligned (Li&nbsp;Cheng) direction</div>
+World Commander program · <b>Crowd Motion track (v0 de-risk)</b></div>
 <h1>{TITLE}</h1>
 <p class="hint">Free-form natural-language command → coordinated crowd motion, synthetic-data pipeline.
 Tests the two riskiest assumptions before any GPU training.</p>
