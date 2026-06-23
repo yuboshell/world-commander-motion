@@ -1,0 +1,110 @@
+{
+  "mock": {
+    "n_samples": 100,
+    "n_unique": 20,
+    "unique_ratio": 0.2,
+    "mattr": 0.6181818181818182,
+    "vocab": 41,
+    "mean_len": 3.39
+  },
+  "real": {
+    "n_samples": 100,
+    "n_unique": 66,
+    "unique_ratio": 0.66,
+    "mattr": 0.8843119266055046,
+    "vocab": 82,
+    "mean_len": 10.99
+  },
+  "examples": {
+    "go_to": {
+      "mock": [
+        "everyone head to (8.0, 8.0)",
+        "move to (8.0, 8.0)",
+        "push to (8.0, 8.0)",
+        "rally at (8.0, 8.0)"
+      ],
+      "real": [
+        "Push the whole group forward to the coordinates eight by eight.",
+        "Advance the entire group to grid coordinates 8, 8.",
+        "Advance the entire group to the coordinates eight by eight.",
+        "Advance the entire group to the coordinates eight by eight.",
+        "Move the whole group to the coordinates eight by eight.",
+        "Advance the entire group to coordinates eight by eight.",
+        "Advance the entire group to coordinates eight, eight.",
+        "Advance the whole group to the coordinates eight by eight."
+      ]
+    },
+    "form_line": {
+      "mock": [
+        "fall into a line formation",
+        "form a line",
+        "get into a row",
+        "line up"
+      ],
+      "real": [
+        "Form a line from the point at three, five to seven, five.",
+        "Form a line from the point at three, five to the point at seven, five.",
+        "Line up in a straight line from the point at three, five to the point at seven, five.",
+        "Form a line from the point at three, five to seven, five.",
+        "Form up in a line from the point at three, five to the point at seven, five.",
+        "Form a line from the first marker to the second marker",
+        "Form a line from the point at three, five to the point at seven, five.",
+        "Form a line from the point at three, five to seven, five."
+      ]
+    },
+    "regroup": {
+      "mock": [
+        "consolidate on me",
+        "everyone group up",
+        "pull back together",
+        "regroup"
+      ],
+      "real": [
+        "Fall back now and consolidate at the coordinates 5, 5.",
+        "Fall back now and converge at the coordinates five, five.",
+        "Fall back now and regroup at the coordinates 5.0, 5.0.",
+        "Fall back and converge at the coordinates 5, 5.",
+        "Fall back and converge at the coordinates five, five.",
+        "Fall back to the rally point at coordinates five, five and hold your formation.",
+        "Fall back and regroup at coordinates 5, 5.",
+        "Fall back now and regroup at the coordinates 5.0, 5.0."
+      ]
+    },
+    "disperse": {
+      "mock": [
+        "disperse",
+        "fan out",
+        "scatter and spread",
+        "spread out"
+      ],
+      "real": [
+        "Break into scattered positions, take cover and move to flank positions.",
+        "Break contact and disperse to flank positions",
+        "Fall back and disperse\u2014take up firing positions on your own initiative.",
+        "Break formation and disperse to cover positions.",
+        "Fall back and disperse\u2014take cover and break contact.",
+        "Break contact and disperse to flank positions",
+        "Break formation and disperse to safer ground",
+        "Break formation and disperse immediately"
+      ]
+    },
+    "flank": {
+      "mock": [
+        "envelop the target",
+        "flank them",
+        "hit both sides",
+        "split and flank"
+      ],
+      "real": [
+        "Flank from the north and south, converge on the target at coordinates 8,5.",
+        "Flank left and right, converge on the target at coordinates 8,5.",
+        "Flank the target from both sides, converge at the breach point.",
+        "Flank left and right, converge on the target at coordinates 8,5.",
+        "Flank left and right, converge on the target from both sides.",
+        "Flank left and right, close on the target from both sides!",
+        "Flank the target from both sides, converge at the coordinates 8, 5.",
+        "Flank left and right, close on the target at coordinates 8,5."
+      ]
+    }
+  }
+}

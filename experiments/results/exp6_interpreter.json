@@ -1,0 +1,1571 @@
+{
+  "concrete": {
+    "latency_concurrent_s": [
+      0.7706277742981911,
+      0.6305113360285759,
+      0.6606004443019629,
+      0.7030830569565296,
+      0.7627052254974842,
+      0.7163826767355204,
+      0.7611096296459436,
+      0.6942020803689957,
+      0.7058564480394125,
+      0.709128076210618,
+      0.7309842649847269,
+      0.7282795161008835,
+      0.7173415366560221,
+      0.7280909679830074,
+      0.7246923968195915,
+      0.9203907325863838,
+      0.8840671200305223,
+      0.8985043913125992,
+      0.9318754784762859,
+      0.9309324007481337,
+      0.9173847679048777,
+      0.9112290274351835,
+      0.9108106642961502,
+      0.9134449381381273,
+      0.8989987410604954,
+      0.8900467436760664,
+      0.8994847629219294,
+      0.8564127814024687,
+      0.856647027656436,
+      0.8655819781124592,
+      0.6419792920351028,
+      0.6631645057350397,
+      0.8974684961140156,
+      0.7360053732991219,
+      0.7383236289024353,
+      0.7748013660311699,
+      0.776729641482234,
+      0.9914247822016478,
+      0.7849964834749699,
+      1.032226225361228,
+      0.8649237025529146,
+      1.016708493232727,
+      1.011505139991641,
+      0.8384373430162668,
+      0.8363786991685629,
+      0.8294784408062696,
+      0.5922721270471811,
+      0.569855535402894,
+      0.4748622551560402,
+      0.49877741001546383,
+      0.5120320972055197,
+      0.4944754894822836,
+      0.46867748349905014,
+      0.4678771086037159,
+      0.4635432008653879,
+      0.46408070251345634,
+      0.48544236086308956,
+      0.5418797079473734,
+      0.866152536123991,
+      0.5282148793339729,
+      0.6943079382181168,
+      0.6962876748293638,
+      0.8270551413297653,
+      0.6613490395247936,
+      0.8049132339656353,
+      0.7738988716155291,
+      0.6368957199156284,
+      0.6348790507763624,
+      0.6300647240132093,
+      0.7921981867402792,
+      0.777183759957552,
+      0.621039068326354,
+      0.7695598248392344,
+      0.6409018877893686,
+      0.6352243274450302
+    ],
+    "LLM": {
+      "kind_acc": 0.9733333333333334,
+      "kind_acc_per_cmd": {
+        "go_to": 1.0,
+        "form_line": 1.0,
+        "regroup": 1.0,
+        "disperse": 0.8666666666666667,
+        "flank": 1.0
+      },
+      "behavioural_grounding": 0.8766666666666667,
+      "param_err_mean": 0.5079296164258152,
+      "param_err_n": 60,
+      "confusion": {
+        "go_to": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "form_line": {
+          "go_to": 0,
+          "form_line": 15,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "regroup": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 15,
+          "disperse": 0,
+          "flank": 0
+        },
+        "disperse": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 13,
+          "flank": 2
+        },
+        "flank": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 15
+        }
+      }
+    },
+    "LLM-guarded": {
+      "kind_acc": 0.9733333333333334,
+      "kind_acc_per_cmd": {
+        "go_to": 1.0,
+        "form_line": 1.0,
+        "regroup": 1.0,
+        "disperse": 0.8666666666666667,
+        "flank": 1.0
+      },
+      "behavioural_grounding": 0.965,
+      "param_err_mean": 0.09433962264150944,
+      "param_err_n": 53,
+      "confusion": {
+        "go_to": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "form_line": {
+          "go_to": 0,
+          "form_line": 15,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "regroup": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 15,
+          "disperse": 0,
+          "flank": 0
+        },
+        "disperse": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 13,
+          "flank": 2
+        },
+        "flank": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 15
+        }
+      }
+    },
+    "LLM-kind": {
+      "kind_acc": 0.9733333333333334,
+      "kind_acc_per_cmd": {
+        "go_to": 1.0,
+        "form_line": 1.0,
+        "regroup": 1.0,
+        "disperse": 0.8666666666666667,
+        "flank": 1.0
+      },
+      "behavioural_grounding": 0.975,
+      "param_err_mean": null,
+      "param_err_n": 0,
+      "confusion": {
+        "go_to": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "form_line": {
+          "go_to": 0,
+          "form_line": 15,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "regroup": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 15,
+          "disperse": 0,
+          "flank": 0
+        },
+        "disperse": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 13,
+          "flank": 2
+        },
+        "flank": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 15
+        }
+      }
+    },
+    "keyword": {
+      "kind_acc": 0.9466666666666667,
+      "kind_acc_per_cmd": {
+        "go_to": 1.0,
+        "form_line": 1.0,
+        "regroup": 1.0,
+        "disperse": 0.7333333333333333,
+        "flank": 1.0
+      },
+      "behavioural_grounding": 0.9483333333333334,
+      "param_err_mean": 0.0,
+      "param_err_n": 20,
+      "confusion": {
+        "go_to": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "form_line": {
+          "go_to": 0,
+          "form_line": 15,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "regroup": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 15,
+          "disperse": 0,
+          "flank": 0
+        },
+        "disperse": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 11,
+          "flank": 4
+        },
+        "flank": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 15
+        }
+      }
+    },
+    "none": {
+      "kind_acc": 0.2,
+      "kind_acc_per_cmd": {
+        "go_to": 1.0,
+        "form_line": 0.0,
+        "regroup": 0.0,
+        "disperse": 0.0,
+        "flank": 0.0
+      },
+      "behavioural_grounding": 0.31666666666666665,
+      "param_err_mean": 0.0,
+      "param_err_n": 15,
+      "confusion": {
+        "go_to": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "form_line": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "regroup": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "disperse": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "flank": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        }
+      }
+    },
+    "_examples": [
+      {
+        "true": "go_to",
+        "text": "Push the whole group forward to the coordinates eight by eight.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance the entire group to grid coordinates 8, 8.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance the entire group to the coordinates eight by eight.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance the entire group to the coordinates eight by eight.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Move the whole group to the coordinates eight by eight.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance the entire group to coordinates eight by eight.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance the entire group to coordinates eight, eight.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance the whole group to the coordinates eight by eight.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Move the whole group to the coordinates eight by eight.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Move the whole group to the coordinates eight by eight.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Push the whole group forward to the coordinates eight by eight.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance the entire group to the coordinates eight by eight.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance the entire group to the coordinates eight by eight.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Move the entire group to coordinates eight by eight.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance the whole group to the coordinates eight by eight.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line from the point at three, five to seven, five.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line from the point at three, five to the point at seven, five.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Line up in a straight line from the point at three, five to the point at seven, five.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line from the point at three, five to seven, five.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form up in a line from the point at three, five to the point at seven, five.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line from the first marker to the second marker",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line from the point at three, five to the point at seven, five.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line from the point at three, five to seven, five.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line from the point at three, five to the point at seven, five.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line from the point at three, five to the point at seven, five.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form up in line from three, five to seven, five.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form up in line between the two markers, start at three, end at seven.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line from the point at three, five to the point at seven, five.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line from the point at three, five to the point at seven, five.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line from the point at three, five to the point at seven, five.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back now and consolidate at the coordinates 5, 5.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back now and converge at the coordinates five, five.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back now and regroup at the coordinates 5.0, 5.0.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and converge at the coordinates 5, 5.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and converge at the coordinates five, five.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back to the rally point at coordinates five, five and hold your formation.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and regroup at coordinates 5, 5.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back now and regroup at the coordinates 5.0, 5.0.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back now and regroup at the coordinates 5 by 5.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and regroup at the coordinates 5.0, 5.0.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and converge at coordinates five, five.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back now and form up at the coordinates 5.0, 5.0.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back now and converge at the coordinates 5.0, 5.0.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and regroup at coordinates 5, 5.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back to the rally point at coordinates 5, 5 and form up tightly.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "disperse",
+        "text": "Break into scattered positions, take cover and move to flank positions.",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and disperse to flank positions",
+        "LLM": "disperse",
+        "keyword": "flank"
+      },
+      {
+        "true": "disperse",
+        "text": "Fall back and disperse\u2014take up firing positions on your own initiative.",
+        "LLM": "disperse",
+        "keyword": "disperse"
+      },
+      {
+        "true": "disperse",
+        "text": "Break formation and disperse to cover positions.",
+        "LLM": "disperse",
+        "keyword": "disperse"
+      },
+      {
+        "true": "disperse",
+        "text": "Fall back and disperse\u2014take cover and break contact.",
+        "LLM": "disperse",
+        "keyword": "disperse"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and disperse to flank positions",
+        "LLM": "disperse",
+        "keyword": "flank"
+      },
+      {
+        "true": "disperse",
+        "text": "Break formation and disperse to safer ground",
+        "LLM": "disperse",
+        "keyword": "disperse"
+      },
+      {
+        "true": "disperse",
+        "text": "Break formation and disperse immediately",
+        "LLM": "disperse",
+        "keyword": "disperse"
+      },
+      {
+        "true": "disperse",
+        "text": "Break formation and disperse to cover positions",
+        "LLM": "disperse",
+        "keyword": "disperse"
+      },
+      {
+        "true": "disperse",
+        "text": "Break formation and disperse to cover positions",
+        "LLM": "disperse",
+        "keyword": "disperse"
+      },
+      {
+        "true": "disperse",
+        "text": "Fall back and disperse\u2014take up defensive positions on your own initiative.",
+        "LLM": "disperse",
+        "keyword": "disperse"
+      },
+      {
+        "true": "disperse",
+        "text": "Fall back and disperse\u2014take up defensive positions on your own initiative.",
+        "LLM": "disperse",
+        "keyword": "disperse"
+      },
+      {
+        "true": "disperse",
+        "text": "Fall back and disperse\u2014take up defensive positions on your own initiative.",
+        "LLM": "disperse",
+        "keyword": "disperse"
+      },
+      {
+        "true": "disperse",
+        "text": "Break into pairs and move to flanking positions",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "disperse",
+        "text": "Break formation and disperse to cover positions",
+        "LLM": "disperse",
+        "keyword": "disperse"
+      },
+      {
+        "true": "flank",
+        "text": "Flank from the north and south, converge on the target at coordinates 8,5.",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank left and right, converge on the target at coordinates 8,5.",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target from both sides, converge at the breach point.",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank left and right, converge on the target at coordinates 8,5.",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank left and right, converge on the target from both sides.",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank left and right, close on the target from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target from both sides, converge at the coordinates 8, 5.",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank left and right, close on the target at coordinates 8,5.",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target from both sides, converge at the coordinate 8, 5.",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank left and right, converge on the target from both sides at the marked position.",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target from both sides, converge at the marker.",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank left and right, converge on the target from both sides at the coordinates 8,5.",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target from both sides, converge at the point.",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target from both sides, converge at the coordinates 8, 5.",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target from both sides, converge at the coordinates eight by five.",
+        "LLM": "flank",
+        "keyword": "flank"
+      }
+    ]
+  },
+  "abstract": {
+    "latency_concurrent_s": [
+      0.9920689966529608,
+      0.9872405920177698,
+      0.854838702827692,
+      0.9620287548750639,
+      0.9628626611083746,
+      0.9698566608130932,
+      0.9693928100168705,
+      0.9433479085564613,
+      0.9610852766782045,
+      0.995736001059413,
+      0.9867161717265844,
+      0.9691675584763288,
+      0.9506495781242847,
+      0.9521091859787703,
+      0.9623770359903574,
+      1.3215325996279716,
+      1.0720183365046978,
+      1.3131749797612429,
+      1.107715930789709,
+      1.3028254192322493,
+      1.0913654156029224,
+      1.236544668674469,
+      1.0082916524261236,
+      1.1164065953344107,
+      1.0988725293427706,
+      0.9880705084651709,
+      0.981600621715188,
+      1.0593616794794798,
+      1.0596320368349552,
+      0.9317528922110796,
+      0.7813993357121944,
+      0.7900431603193283,
+      0.6539161745458841,
+      0.6579309590160847,
+      0.6750032100826502,
+      0.6764470841735601,
+      0.810055123642087,
+      0.6706812828779221,
+      0.6637396551668644,
+      0.8222534637898207,
+      0.8487335033714771,
+      0.8504201453179121,
+      0.8486426118761301,
+      0.8479811027646065,
+      0.8708518091589212,
+      0.8795777279883623,
+      1.0262192226946354,
+      1.0181585233658552,
+      0.8487414978444576,
+      0.8490766398608685,
+      0.8518792744725943,
+      0.6916650105267763,
+      0.6736753024160862,
+      0.6785097736865282,
+      0.7432377859950066,
+      0.7880586590617895,
+      1.0300504341721535,
+      1.0662073399871588,
+      1.1001676842570305,
+      0.8797038700431585,
+      1.0980682000517845,
+      1.1108785904943943,
+      1.0617704130709171,
+      1.0149145144969225,
+      0.9109185189008713,
+      0.912719177082181,
+      0.8715305216610432,
+      0.8333513364195824,
+      0.8179643601179123,
+      0.8026441913098097,
+      0.7875114269554615,
+      0.8013671357184649,
+      0.83956653252244,
+      0.8371933363378048,
+      0.8360592573881149
+    ],
+    "LLM": {
+      "kind_acc": 0.8,
+      "kind_acc_per_cmd": {
+        "go_to": 1.0,
+        "form_line": 1.0,
+        "regroup": 1.0,
+        "disperse": 0.0,
+        "flank": 1.0
+      },
+      "behavioural_grounding": 0.18333333333333332,
+      "param_err_mean": 3.167027836278925,
+      "param_err_n": 60,
+      "confusion": {
+        "go_to": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "form_line": {
+          "go_to": 0,
+          "form_line": 15,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "regroup": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 15,
+          "disperse": 0,
+          "flank": 0
+        },
+        "disperse": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 15,
+          "disperse": 0,
+          "flank": 0
+        },
+        "flank": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 15
+        }
+      }
+    },
+    "LLM-guarded": {
+      "kind_acc": 0.8,
+      "kind_acc_per_cmd": {
+        "go_to": 1.0,
+        "form_line": 1.0,
+        "regroup": 1.0,
+        "disperse": 0.0,
+        "flank": 1.0
+      },
+      "behavioural_grounding": 0.7366666666666667,
+      "param_err_mean": 5.537626603498399,
+      "param_err_n": 6,
+      "confusion": {
+        "go_to": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "form_line": {
+          "go_to": 0,
+          "form_line": 15,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "regroup": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 15,
+          "disperse": 0,
+          "flank": 0
+        },
+        "disperse": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 15,
+          "disperse": 0,
+          "flank": 0
+        },
+        "flank": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 15
+        }
+      }
+    },
+    "LLM-kind": {
+      "kind_acc": 0.8,
+      "kind_acc_per_cmd": {
+        "go_to": 1.0,
+        "form_line": 1.0,
+        "regroup": 1.0,
+        "disperse": 0.0,
+        "flank": 1.0
+      },
+      "behavioural_grounding": 0.8,
+      "param_err_mean": null,
+      "param_err_n": 0,
+      "confusion": {
+        "go_to": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "form_line": {
+          "go_to": 0,
+          "form_line": 15,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "regroup": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 15,
+          "disperse": 0,
+          "flank": 0
+        },
+        "disperse": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 15,
+          "disperse": 0,
+          "flank": 0
+        },
+        "flank": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 15
+        }
+      }
+    },
+    "keyword": {
+      "kind_acc": 0.7866666666666666,
+      "kind_acc_per_cmd": {
+        "go_to": 1.0,
+        "form_line": 0.9333333333333333,
+        "regroup": 1.0,
+        "disperse": 0.0,
+        "flank": 1.0
+      },
+      "behavioural_grounding": 0.7883333333333333,
+      "param_err_mean": null,
+      "param_err_n": 0,
+      "confusion": {
+        "go_to": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "form_line": {
+          "go_to": 0,
+          "form_line": 14,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 1
+        },
+        "regroup": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 15,
+          "disperse": 0,
+          "flank": 0
+        },
+        "disperse": {
+          "go_to": 5,
+          "form_line": 0,
+          "regroup": 9,
+          "disperse": 0,
+          "flank": 1
+        },
+        "flank": {
+          "go_to": 0,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 15
+        }
+      }
+    },
+    "none": {
+      "kind_acc": 0.2,
+      "kind_acc_per_cmd": {
+        "go_to": 1.0,
+        "form_line": 0.0,
+        "regroup": 0.0,
+        "disperse": 0.0,
+        "flank": 0.0
+      },
+      "behavioural_grounding": 0.31666666666666665,
+      "param_err_mean": 0.0,
+      "param_err_n": 15,
+      "confusion": {
+        "go_to": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "form_line": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "regroup": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "disperse": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        },
+        "flank": {
+          "go_to": 15,
+          "form_line": 0,
+          "regroup": 0,
+          "disperse": 0,
+          "flank": 0
+        }
+      }
+    },
+    "_examples": [
+      {
+        "true": "go_to",
+        "text": "Advance to the objective and take cover at the rally point.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance to the objective and hold the rally point.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance the entire group to the objective and hold your positions.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance to the objective and secure cover.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance as a cohesive force to the objective and take cover upon reaching the rally point.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance to the objective and take cover at the rally point.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance to the objective and take cover at the rally point.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance to the objective and secure the rally point.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Move as one to the objective and hold your position.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance the whole group to the objective and take cover at the rally point.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance to the objective and hold your position.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance the entire group to the objective and hold your fire until within range of the enemy.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance as a cohesive force to the objective and secure cover.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance the entire group to the objective and take cover at the rally point.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "go_to",
+        "text": "Advance the whole group to the objective and hold the rally point.",
+        "LLM": "go_to",
+        "keyword": "go_to"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line between the objective and cover, ready to advance.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line between the objective and cover, hold your position.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Line up in a staggered formation between the objective and the rally point, taking cover and preparing for engagement.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line between the objective and cover, hold position.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Fall in line between the objectives and cover, prepare to advance on my command.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line between the objective and the rally point, provide covering fire, and hold your position until the enemy advances.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line between the objective and cover, hold your position and prepare to advance.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line between the two markers and hold position.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line between the objective and cover, ready to advance.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line between the objective and cover, ready to move forward.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line between the two markers and hold position.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Fall in line between the two points, take cover, and hold your position.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line between the objective and cover, ready to move as one.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line between the objective and cover, hold your position and prepare to engage both sides.",
+        "LLM": "form_line",
+        "keyword": "flank"
+      },
+      {
+        "true": "form_line",
+        "text": "Form a line between the two markers and hold position.",
+        "LLM": "form_line",
+        "keyword": "form_line"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and consolidate at the rally point, maintaining cohesion and covering fire.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and consolidate at the rally point, hold your formation.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and consolidate at the rally point, maintaining tight formation and covering fire.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and consolidate at the rally point, maintain cohesion and cover.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and consolidate at the rally point.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back to the rally point and consolidate under cover.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and consolidate at the rally point, maintaining cohesion and covering fire as you move.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and regroup at the rally point, stay tight and maintain cover.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and consolidate at the rally point, maintain cohesion and cover.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and consolidate at the rally point.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and consolidate at the rally point, hold your formation.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and consolidate at the rally point, hold tight and prepare to counter.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and consolidate at the rally point, maintain formation and cover.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and consolidate at the rally point.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "regroup",
+        "text": "Fall back and consolidate at the rally point, maintaining close formation.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and fall back to the rally point, taking cover as you move.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and move to cover, regroup at the rally point.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and maneuver to cover, regroup at the rally point.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and move to the rally point, using cover to avoid exposure.",
+        "LLM": "regroup",
+        "keyword": "go_to"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and move to the rally point, using cover to avoid exposure.",
+        "LLM": "regroup",
+        "keyword": "go_to"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and move to the rally point, using cover to mask your movement.",
+        "LLM": "regroup",
+        "keyword": "go_to"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and move to cover, regroup at the rally point.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and maneuver to cover, regroup at the rally point.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and fall back to the rally point, maintaining cover and dispersing to avoid being flanked.",
+        "LLM": "regroup",
+        "keyword": "flank"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and fall back to the rally point, using cover to mask movement.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and maneuver to cover, regroup at the rally point.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and move to the rally point, using cover to mask your movement.",
+        "LLM": "regroup",
+        "keyword": "go_to"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and move to the rally point, using cover to mask your movement.",
+        "LLM": "regroup",
+        "keyword": "go_to"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and move to cover, regroup at the rally point.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "disperse",
+        "text": "Break contact and maneuver to cover, regroup at the rally point.",
+        "LLM": "regroup",
+        "keyword": "regroup"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target and converge from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target and converge from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target and converge from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target and converge from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target and close from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target and converge from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target and converge from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target and converge from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target and converge from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target and converge from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target and converge from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target and converge from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target and converge from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target and converge from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      },
+      {
+        "true": "flank",
+        "text": "Flank the target and converge from both sides!",
+        "LLM": "flank",
+        "keyword": "flank"
+      }
+    ]
+  },
+  "latency": {
+    "concurrent_mean": 0.742504799241821,
+    "concurrent_p50": 0.7383236289024353,
+    "concurrent_p95": 0.9497402695938943,
+    "isolated_p50": 0.6928158355876803,
+    "n": 75
+  }
+}

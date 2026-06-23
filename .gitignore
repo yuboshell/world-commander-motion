@@ -11,3 +11,9 @@ runs/
 .DS_Store
 .idea/
 .vscode/
+
+# tooling / large regenerable artifacts
+.playwright-mcp/
+/*.jpeg
+# GIFs are superseded by the interactive replay embedded in report.html
+experiments/figures/*.gif

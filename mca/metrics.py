@@ -22,3 +22,24 @@ def collision_rate(triple, radius: float = 0.3) -> float:
         if (d < radius).any():
             hits += 1
     return hits / len(traj)
+
+
+def formation_error(triple) -> float:
+    """RMS distance (world units) of agents from their assigned targets at the final
+    frame — the plan's 'formation error'. Lower is a tighter realized formation."""
+    final = triple["trajectory"][-1]
+    d = np.linalg.norm(final - triple["targets"], axis=1)
+    return float(np.sqrt((d ** 2).mean()))
+
+
+def completion_time(triple, tol: float = 0.8, frac: float = 0.9):
+    """First frame index at which at least `frac` of agents are within `tol` of their
+    targets (the plan's 'command-completion time', in steps). Returns the sentinel
+    len(trajectory) if the command never completes within the horizon."""
+    traj = triple["trajectory"]
+    targets = triple["targets"]
+    for t, frame in enumerate(traj):
+        d = np.linalg.norm(frame - targets, axis=1)
+        if (d < tol).mean() >= frac:
+            return t
+    return len(traj)

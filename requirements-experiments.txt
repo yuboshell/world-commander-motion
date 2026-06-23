@@ -1,0 +1,8 @@
+# Experiment/analysis deps (the offline experiment battery + visualisation in experiments/).
+# Kept SEPARATE from requirements.txt so the core (L1 + metrics) install stays minimal and
+# GPU-free per the repo contract. Install with:  pip install -r requirements-experiments.txt
+matplotlib>=3.7      # plots + animation (mp4 via ffmpeg, gif via pillow)
+pillow>=9.0          # GIF writer for experiments/viz.py
+
+# RealParaphraser / LLMInterpreter additionally need `openai` (already in requirements.txt)
+# and a served OpenAI-compatible endpoint (amax: vLLM Qwen on :8000).

@@ -42,3 +42,10 @@ pytest -q
 ## Status
 - Proposal/prototype stage. Offline pipeline only; `RealRenderer` not yet implemented.
 - Remote: GitLab (GitHub account suspended). No build beyond the smoke run + tests.
+- **v0 experiment session (2026-06-23, on amax41) — see `experiments/REPORT.md`.** Done:
+  `RealParaphraser` fixed + run on the served Qwen (L2); the interpreter [A] built
+  (`mca/interpret.py`) with a coordinate guard; the model-in-the-loop grounding test run in
+  its GPU-free form (text→command→sim) — concrete grounding 0.88→0.96, abstract 0.18→0.74
+  with the guard; added the `flank` command + `formation_error`/`completion_time` metrics; E1–E6
+  + viz + an end-to-end `demo.py`. Still open: `RealRenderer` (no TLControl/CAMDM weights on
+  box) and the coordination layer [B]. Changes are uncommitted (in the working tree).
