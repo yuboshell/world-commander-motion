@@ -1,0 +1,8 @@
+numpy>=1.24
+openai>=1.0        # RealParaphraser (served-LLM client); MockParaphraser needs nothing
+
+# dev
+pytest>=7.0
+
+# NOTE: the motion model (TLControl / CAMDM) and its torch deps are NOT listed here —
+# they install on the GPU box (amax) when RealRenderer is filled in. See README / the plan.

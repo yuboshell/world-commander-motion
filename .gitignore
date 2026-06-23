@@ -1,0 +1,13 @@
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+.env
+outputs/
+runs/
+*.npz
+*.mp4
+.DS_Store
+.idea/
+.vscode/
