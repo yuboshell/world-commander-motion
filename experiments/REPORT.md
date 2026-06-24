@@ -242,6 +242,20 @@ Try your own: `python experiments/demo.py "hold a line along the left edge"`.
 
 ![demo](figures/demo_montage.png)
 
+### L3 — real full-body motion (OmniControl)
+
+`OmniControl/gen_crowd.py` feeds each command's per-agent path into a pretrained,
+trajectory-controllable motion model (**OmniControl**, HumanML3D) as the pelvis spatial-control
+signal, generating **full-body skeleton motion that walks the path** — on one RTX 2080 Ti (GPU 2),
+all 5 commands. **Budget:** ~153 s to generate a 196-frame (9.8 s) clip — **~16× slower than
+real-time** (1.3 fps) at **~0.57 GB peak VRAM**. So a controllable model *does* turn the commanded
+trajectory into plausible full-body motion (assumption *b*'s "controllable motion" half), and it is
+**VRAM-cheap** — but the diffusion+guidance generator is far from real-time. The bottleneck is
+**latency, not memory**, which a distilled / fast model (MotionLCM) must close. `mca/render.py`'s
+`RealRenderer` bridges to the model as a subprocess so the GPU-free core stays clean.
+
+![L3 motion](figures/motion_montage.png)
+
 ---
 
 ## 3. Mapping to the research plan
@@ -253,8 +267,8 @@ Try your own: `python experiments/demo.py "hold a line along the left edge"`.
 | command-grounding (concrete) | E1, E6 — 0.88–0.97 end-to-end via real Qwen | ✅ demonstrated |
 | command-grounding (abstract) | E6 abstract — type 0.80, location hallucinated | ⚠️ gap quantified |
 | coordination (collision/formation/completion) | E1–E4 | ✅ measured; tradeoff mapped |
-| real-time budget | interpreter latency (E6), sim FPS (E3) | 🟡 partial (no motion FPS) |
-| motion quality (FID, foot-skate) | needs motion model | ❌ not on this box |
+| real-time budget | interpreter latency (E6), sim FPS (E3), **L3 motion gen ~16× slower than real-time, 0.57 GB** | 🟡 measured; motion not yet real-time |
+| motion quality (FID, foot-skate) | L3 renders full-body motion (skeleton); FID/foot-skate not scored | 🟡 motion exists, not yet scored |
 | baselines (no-interpreter, literal) | E6 `none` / `keyword` | ✅ included |
 
 **Risk table (§8) update:**
@@ -263,7 +277,7 @@ Try your own: `python experiments/demo.py "hold a line along the left edge"`.
 |---|---|
 | synthetic→real gap | pipeline runs on the *real* served Qwen; concrete grounding 0.88–0.97 |
 | **grounding abstract intent** | **quantified + mitigated**: type recovers (0.80), raw spatial grounding hallucinates (err 3.17 → 0.18); coordinate guard restores it to 0.74. Principled fix (world-grounding / reward-from-language) is v2 |
-| real-time × coordination × quality × budget | latency 0.69 s + sim O(N²) ceiling measured; motion FPS still open |
+| real-time × coordination × quality × budget | latency 0.69 s + sim O(N²) ceiling measured; **L3 motion gen ~16× slower than real-time at 0.57 GB → latency-bound, distill/MotionLCM next** |
 | coordination realism | E4 Pareto gap 0.21; collisions saturate by ~50 agents → motivates layer [B] |
 
 ---
@@ -276,16 +290,17 @@ Try your own: `python experiments/demo.py "hold a line along the left edge"`.
 - **The data layer is usable for concrete commands, end to end, through real LLM components.**
 - The interpreter [A] exists and is measured (accuracy + latency).
 - The coordinate guard mitigates the abstract-grounding hallucination (abstract 0.18→0.74).
+- **L3 turns each trajectory into real full-body motion** (OmniControl), all 5 commands, ~0.57 GB VRAM.
 
 **Remaining (in priority order)**
-1. **Abstract spatial grounding (principled).** The coordinate guard (shipped) is the v0
-   mitigation; the real fix is an explicit `resolve(landmark, world_state)` step (turn "the
-   objective" into a scene location) and/or reward-from-language for ungroundable intent. E6
-   shows this is the single biggest correctness lever.
-2. **Coordination layer [B]** — replace naive separation with RVO/ORCA, then RL/MARL, to close the
+1. **Real-time motion.** L3 works but the diffusion+guidance generator is **~16× too slow**
+   (latency-bound, not memory). Distil it or swap for a fast model (**MotionLCM** ~30 ms) to
+   finish assumption *(b)*; then score motion quality (FID, foot-skating).
+2. **Abstract spatial grounding (principled).** The coordinate guard (shipped) is the v0
+   mitigation; the real fix is an explicit `resolve(landmark, world_state)` step and/or
+   reward-from-language for ungroundable intent (E6 — the biggest correctness lever).
+3. **Coordination layer [B]** — replace naive separation with RVO/ORCA, then RL/MARL, to close the
    E4 Pareto gap and the E3 density collapse.
-3. **RealRenderer (L3) + motion FPS/VRAM** — load TLControl/CAMDM (needs weights), finish the
-   *(b)* real-time-motion assumption and the motion-quality axis. (Not on this box.)
 4. **Sim scaling** — spatial hashing for the O(N²) separation step before large crowds.
 
 ---
@@ -304,6 +319,10 @@ python experiments/demo.py "hold the left edge" # ...or type your own order
 python experiments/build_report.py             # build the self-contained web report.html
 python experiments/build_report.py --publish   # ...and copy it to ../world-commander-bench/motion.html
 bash experiments/serve_report.sh               # optional local preview (127.0.0.1:8899, SSH-tunnel)
+
+# L3 real full-body motion (GPU box; separate omnicontrol env):
+CUDA_VISIBLE_DEVICES=2 /home/yubo/enter/envs/omnicontrol/bin/python \
+  /mnt/yubo/repos/OmniControl/gen_crowd.py --path crowd_paths/go_to.npy --text "a person walks"
 ```
 
 Web report follows the world-commander-bench convention (self-contained `report.html`, interactive
@@ -324,6 +343,9 @@ reachable from the switcher in every report. What landed:
   (`--publish`) + `serve_report.sh` + `report.html`; PNG figures + result JSONs committed; GIFs and
   the venv gitignored.
 - `requirements-experiments.txt`; tests 11/11.
+- **L3:** `mca/render.py` `RealRenderer` bridges to **OmniControl** (`/mnt/yubo/repos/OmniControl`,
+  env `omnicontrol`, `gen_crowd.py`); `results/l3_motion.json` + the L3 report section/gallery.
+- `world-commander-report` skill (`.claude/skills/`) for the build+publish procedure.
 
 The standalone motion Pages site was retired (its `.gitlab-ci.yml` removed); publishing now goes
 through the bench hub.
