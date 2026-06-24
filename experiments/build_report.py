@@ -94,7 +94,7 @@ def _videos_block():
     if not vids:
         return "<p class=\"hint\">(crowd videos rendering…)</p>"
     cells = "".join(
-        f'<figure class="vid"><video src="{_video_uri(p)}" controls autoplay muted loop '
+        f'<figure class="vid"><video src="{_video_uri(p)}" controls autoplay muted '
         f'playsinline preload="metadata"></video><figcaption>“{k}”</figcaption></figure>'
         for p, k in vids)
     return f'<div class="videos">{cells}</div>'
