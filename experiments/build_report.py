@@ -84,6 +84,22 @@ def _gallery_html(items):
     return f'<div class="gallery">{cells}</div>'
 
 
+def _video_uri(path: Path) -> str:
+    return f"data:video/mp4;base64,{base64.b64encode(path.read_bytes()).decode()}"
+
+
+def _videos_block():
+    """The crowd-motion videos — the report's headline demo, embedded large as <video>."""
+    vids = [(FIGS / f"crowd_{k}.mp4", k) for k in ORDER if (FIGS / f"crowd_{k}.mp4").exists()]
+    if not vids:
+        return "<p class=\"hint\">(crowd videos rendering…)</p>"
+    cells = "".join(
+        f'<figure class="vid"><video src="{_video_uri(p)}" controls autoplay muted loop '
+        f'playsinline preload="metadata"></video><figcaption>“{k}”</figcaption></figure>'
+        for p, k in vids)
+    return f'<div class="videos">{cells}</div>'
+
+
 def t_coverage():
     d = J("exp1_coverage")
     rows = [[k, f"{d[k]['grounding'][0]:.2f}", f"{d[k]['collision'][0]:.2f}",
@@ -203,21 +219,20 @@ def sections():
          "abstract-intent bottleneck is grounding the <i>location</i>, not reading the <i>intent</i> "
          "(plan risk #2, now with a working v0 mitigation)."},
 
-        {"title": "L3 — real full-body motion (OmniControl): the trajectory becomes a person",
-         "png": FIGS / "motion_montage.png",
-         "intro": "<p>The final layer, now real (not the stub). Feed each command's per-agent path into "
-         "a pretrained, trajectory-controllable motion model (<b>OmniControl</b>, HumanML3D) as the "
-         "pelvis spatial-control signal, and it generates <b>full-body motion that walks the path</b> — "
-         "on one RTX 2080 Ti (GPU 2). The L1 dots stay as the honest coordination view; this is the same "
-         "trajectories rendered as people (green = the commanded pelvis path).</p>",
-         "gallery": [(FIGS / f"motion_{k}.gif", k) for k in ORDER],
+        {"title": "L3 — the motion model and its real-time budget",
+         "png": FIGS / "crowd_demo.png",
+         "intro": "<p>The crowd videos at the top are L3. Each agent's trajectory drives a pretrained, "
+         "trajectory-controllable motion model (<b>OmniControl</b>, HumanML3D) for the <b>walk</b>; the "
+         "<b>positions come from the exact L1 trajectories</b> — the model supplies the body, re-rooted "
+         "onto each agent's path and turned to face its travel direction, so the coordination is "
+         "faithful (the model alone doesn't place agents absolutely). Here is what one character costs.</p>",
          "table": t_l3(),
-         "caption": "<b>Assumption (b), half-validated.</b> A controllable model does turn the commanded "
-         "trajectory into plausible full-body motion, and it is <b>VRAM-cheap (~0.57 GB)</b> — it fits a "
-         "consumer GPU with room to spare. But generation is diffusion + spatial guidance: <b>~153 s for "
-         "a 9.8 s clip, ~16× slower than real time</b> (1.3 fps). So the real-time bottleneck is "
-         "<b>latency, not memory</b> — exactly what a distilled / fast model (MotionLCM ~30 ms, the "
-         "efficiency line) must close. This is the budget-frontier datapoint the plan calls for."},
+         "caption": "<b>Assumption (b), half-validated.</b> A controllable model turns a commanded "
+         "trajectory into plausible full-body motion, at <b>~0.57 GB VRAM</b> per character — but "
+         "generation is diffusion + spatial guidance, <b>~153 s per agent (~16× slower than real time)</b>, "
+         "so a crowd costs N× that. The real-time bottleneck is <b>latency, not memory</b>, which a "
+         "distilled / fast model (MotionLCM ~30 ms) must close — the budget-frontier datapoint the plan "
+         "calls for."},
 
         {"title": "Capstone — the whole pipeline end to end", "png": FIGS / "demo_montage.png",
          "intro": "<p><code>experiments/demo.py</code> runs a typed free-form order through the entire "
@@ -282,6 +297,7 @@ def main():
     ]
     defs_html = "".join(f"<dt>{t}</dt><dd>{d}</dd>" for t, d in defs)
     opts = "".join(f'<option value="{k}">{k}</option>' for k in ORDER)
+    videos_block = _videos_block()
 
     html = f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
@@ -302,6 +318,9 @@ def main():
   .gallery {{ display:grid; grid-template-columns:repeat(auto-fill,minmax(165px,1fr)); gap:12px; margin:12px 0; }}
   .gallery figure {{ margin:0; }} .gallery img {{ width:100%; border:1px solid #e2e2e2; border-radius:6px; }}
   .gallery figcaption {{ text-align:center; font-size:.82rem; color:#666; margin-top:2px; }}
+  .videos {{ display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:16px; margin:14px 0; }}
+  .vid {{ margin:0; }} .vid video {{ width:100%; border:1px solid #ddd; border-radius:8px; background:#fafafa; }}
+  .vid figcaption {{ text-align:center; font-weight:600; font-size:.95rem; margin-top:3px; }}
   .viewer {{ text-align:center; }}
   #frame {{ width:430px; max-width:100%; border:1px solid #e2e2e2; border-radius:6px; }}
   .controls {{ display:flex; gap:.5rem; align-items:center; justify-content:center;
@@ -320,10 +339,17 @@ Tests the two riskiest assumptions before any GPU training.</p>
 
 <table>{meta_rows}</table>
 
-<p>Below is the L1 crowd executing each canonical command (target = red ×). <b>Pick a command and
-press Play</b> (or drag the slider), then read on for what is measured.</p>
+<h2>Crowd motion — the command, rendered as people</h2>
+<p class="hint">Each agent's command-driven trajectory is rendered as full-body motion (OmniControl)
+and the whole crowd is composited into one coordinated 3D scene — the same thing the dots show
+below, as walking characters (6 agents, on a 2080 Ti). Press play.</p>
+{videos_block}
 
-<h2>Replay <span class="hint">(choose a command; drag the slider or press Play)</span></h2>
+<h2>The arena (dots) — the trajectories the characters follow</h2>
+<p>The L1 crowd executing each canonical command (target = red ×); the characters above walk these
+exact paths. <b>Pick a command and press Play</b> (or drag the slider), then read on for what's
+measured.</p>
+<h3 class="hint" style="margin:0">interactive replay</h3>
 <div class="viewer">
   <img id="frame" alt="crowd frame">
   <div class="controls">
