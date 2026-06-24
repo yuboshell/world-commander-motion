@@ -31,7 +31,7 @@ META = {
     "Machine": "amax41 (3× RTX 2080 Ti)",
     "Served model": "Qwen/Qwen3-14B-AWQ via vLLM (OpenAI-compatible, localhost:8000/v1)",
     "Pipeline": "L1 NumPy crowd sim (real) · L2 served-Qwen paraphraser · [A] served-Qwen "
-                "interpreter · L3 stub (no motion model on box)",
+                "interpreter · L3 OmniControl (trajectory → full-body motion, GPU 2)",
     "Note": "the served Qwen is shared, so latency carries contention noise; L1/metrics are "
             "GPU-free and deterministic.",
 }
@@ -75,6 +75,13 @@ def _table(headers, rows):
     h = "".join(f"<th>{c}</th>" for c in headers)
     body = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r) + "</tr>" for r in rows)
     return f"<table>\n<tr>{h}</tr>\n{body}</table>"
+
+
+def _gallery_html(items):
+    """items = [(Path, label), ...] -> a responsive grid of embedded images (e.g. motion GIFs)."""
+    cells = "".join(f'<figure><img src="{uri(p)}"><figcaption>{lab}</figcaption></figure>'
+                    for p, lab in items)
+    return f'<div class="gallery">{cells}</div>'
 
 
 def t_coverage():
@@ -123,6 +130,14 @@ def t_interpreter():
             label = name if name != "LLM-guarded" else "<b>LLM-guarded</b>"
             rows.append([cond, label, f"{r['kind_acc']:.2f}", f"{r['behavioural_grounding']:.2f}", pe])
     return _table(["paraphrase", "interpreter", "kind accuracy", "behavioural grounding", "coord err"], rows)
+
+
+def t_l3():
+    d = J("l3_motion"); pc = d["per_command"]
+    rows = [[k, pc[k]["frames"], f"{pc[k]['gen_s']:.0f} s", f"{pc[k]['throughput_fps']:.1f}",
+             f"{pc[k]['peak_vram_gb']:.2f}", f"{pc[k]['realtime_factor']:.0f}×"] for k in ORDER]
+    return _table(["command", "frames", "gen latency", "throughput (fps)", "peak VRAM (GB)",
+                   "slower than real-time"], rows)
 
 
 # ----------------------------------------------------------------------------- sections
@@ -188,6 +203,22 @@ def sections():
          "abstract-intent bottleneck is grounding the <i>location</i>, not reading the <i>intent</i> "
          "(plan risk #2, now with a working v0 mitigation)."},
 
+        {"title": "L3 — real full-body motion (OmniControl): the trajectory becomes a person",
+         "png": FIGS / "motion_montage.png",
+         "intro": "<p>The final layer, now real (not the stub). Feed each command's per-agent path into "
+         "a pretrained, trajectory-controllable motion model (<b>OmniControl</b>, HumanML3D) as the "
+         "pelvis spatial-control signal, and it generates <b>full-body motion that walks the path</b> — "
+         "on one RTX 2080 Ti (GPU 2). The L1 dots stay as the honest coordination view; this is the same "
+         "trajectories rendered as people (green = the commanded pelvis path).</p>",
+         "gallery": [(FIGS / f"motion_{k}.gif", k) for k in ORDER],
+         "table": t_l3(),
+         "caption": "<b>Assumption (b), half-validated.</b> A controllable model does turn the commanded "
+         "trajectory into plausible full-body motion, and it is <b>VRAM-cheap (~0.57 GB)</b> — it fits a "
+         "consumer GPU with room to spare. But generation is diffusion + spatial guidance: <b>~153 s for "
+         "a 9.8 s clip, ~16× slower than real time</b> (1.3 fps). So the real-time bottleneck is "
+         "<b>latency, not memory</b> — exactly what a distilled / fast model (MotionLCM ~30 ms, the "
+         "efficiency line) must close. This is the budget-frontier datapoint the plan calls for."},
+
         {"title": "Capstone — the whole pipeline end to end", "png": FIGS / "demo_montage.png",
          "intro": "<p><code>experiments/demo.py</code> runs a typed free-form order through the entire "
          "stack with the real LLM: text → guarded Qwen interpreter → canonical command → sim → motion. "
@@ -218,12 +249,15 @@ def main():
         f"5 canonical commands · grounding ≈<b>1.0</b> (E1) · closed-loop command recovery "
         f"<b>{e6['concrete']['LLM']['kind_acc']:.2f}</b> and end-to-end grounding "
         f"<b>{e6['concrete']['LLM-guarded']['behavioural_grounding']:.2f}</b> through the real Qwen "
-        f"(E6) · interpreter latency p50 <b>{lat['isolated_p50'] * 1000:.0f} ms</b>")
+        f"(E6) · interpreter latency p50 <b>{lat['isolated_p50'] * 1000:.0f} ms</b> · L3 real full-body "
+        f"motion via OmniControl (VRAM <b>{J('l3_motion')['aggregate']['peak_vram_gb']:.2f} GB</b>, "
+        f"~{J('l3_motion')['aggregate']['mean_realtime_factor']:.0f}× slower than real-time)")
 
     sec_html = ""
     for s in sections():
         img = f'<img class="metrics" src="{uri(s["png"])}" alt="{s["title"]}">\n' if s.get("png") else ""
-        sec_html += (f"<h2>{s['title']}</h2>\n{s.get('intro','')}\n{img}"
+        gal = _gallery_html(s["gallery"]) + "\n" if s.get("gallery") else ""
+        sec_html += (f"<h2>{s['title']}</h2>\n{s.get('intro','')}\n{gal}{img}"
                      f"{s.get('table') or ''}\n<p class=\"hint\">{s['caption']}</p>\n")
 
     defs = [
@@ -242,6 +276,9 @@ def main():
          "end-to-end score."),
         ("Interpreter latency", "wall-clock per served-LLM interpret call (a real budget-frontier "
          "datapoint for component [A])."),
+        ("L3 generation latency / VRAM", "wall-clock to generate one 196-frame (9.8 s) full-body clip "
+         "from a trajectory, and peak GPU memory — the motion-model budget; 'slower than real-time' = "
+         "generation time ÷ clip length."),
     ]
     defs_html = "".join(f"<dt>{t}</dt><dd>{d}</dd>" for t, d in defs)
     opts = "".join(f'<option value="{k}">{k}</option>' for k in ORDER)
@@ -262,6 +299,9 @@ def main():
   th {{ background:#f7f8fa; }}
   dl {{ margin:.4rem 0; }} dt {{ font-weight:600; margin-top:.5rem; }} dd {{ margin:0 0 .2rem 1rem; }}
   img.metrics {{ width:100%; border:1px solid #e2e2e2; border-radius:6px; }}
+  .gallery {{ display:grid; grid-template-columns:repeat(auto-fill,minmax(165px,1fr)); gap:12px; margin:12px 0; }}
+  .gallery figure {{ margin:0; }} .gallery img {{ width:100%; border:1px solid #e2e2e2; border-radius:6px; }}
+  .gallery figcaption {{ text-align:center; font-size:.82rem; color:#666; margin-top:2px; }}
   .viewer {{ text-align:center; }}
   #frame {{ width:430px; max-width:100%; border:1px solid #e2e2e2; border-radius:6px; }}
   .controls {{ display:flex; gap:.5rem; align-items:center; justify-content:center;
@@ -309,8 +349,8 @@ crowd sim (<b>L1</b>) into coordinated trajectories; a served LLM paraphrases it
 (<b>L2</b>); an LLM interpreter (<b>[A]</b>) maps text back to a command; metrics score the loop. It
 tests the two riskiest assumptions (research-plan §7): <b>(a)</b> the synthetic pipeline yields usable
 data, and <b>(b)</b> a controllable model follows a command in real time. This run attacks <b>(a)</b>
-end to end with the real served Qwen; <b>(b)</b>'s full-body-motion FPS needs a text-to-motion model
-not present on this box and is the named follow-up.</p>
+end to end with the real served Qwen, and gets <b>(b)</b> half-way: real full-body motion now follows
+each trajectory (L3, OmniControl on a 2080 Ti) — VRAM-cheap but not yet real-time (see L3 below).</p>
 
 <h2>Results at a glance</h2>
 <div class="summary">{summary}</div>
@@ -324,10 +364,11 @@ not present on this box and is the named follow-up.</p>
 <p><b>De-risked:</b> L1 grounds all 5 commands; the served-Qwen L2 paraphraser works (after a real
 bugfix for reasoning-model output) and adds genuine variety; the data layer is usable for concrete
 commands end to end through real LLM components; the coordinate guard mitigates abstract
-hallucination (0.18→0.74). <b>Remaining:</b> principled abstract spatial grounding
-(<code>resolve(landmark, world_state)</code> / reward-from-language); the coordination layer [B]
-(RVO/ORCA → MARL) to close the E4 gap; <code>RealRenderer</code> (L3) + motion FPS/VRAM to finish
-assumption (b); spatial hashing for the O(N²) sim.</p>
+hallucination (0.18→0.74); and <b>L3 now turns each trajectory into real full-body motion</b>
+(OmniControl) at ~0.57 GB VRAM. <b>Remaining:</b> <b>real-time</b> motion — the generator is ~16×
+too slow, so distill / swap for a fast model (MotionLCM) to finish assumption (b); principled abstract
+spatial grounding (<code>resolve(landmark, world_state)</code> / reward-from-language); the
+coordination layer [B] (RVO/ORCA → MARL) to close the E4 gap; spatial hashing for the O(N²) sim.</p>
 
 <script>
 const REPLAYS = {replays_js};

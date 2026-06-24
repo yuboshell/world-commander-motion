@@ -1,0 +1,48 @@
+{
+  "per_command": {
+    "go_to": {
+      "frames": 196,
+      "gen_s": 152.3,
+      "throughput_fps": 1.29,
+      "peak_vram_gb": 0.57,
+      "realtime_factor": 15.5
+    },
+    "form_line": {
+      "frames": 196,
+      "gen_s": 157.3,
+      "throughput_fps": 1.25,
+      "peak_vram_gb": 0.57,
+      "realtime_factor": 16.1
+    },
+    "regroup": {
+      "frames": 196,
+      "gen_s": 151.8,
+      "throughput_fps": 1.29,
+      "peak_vram_gb": 0.57,
+      "realtime_factor": 15.5
+    },
+    "disperse": {
+      "frames": 196,
+      "gen_s": 152.9,
+      "throughput_fps": 1.28,
+      "peak_vram_gb": 0.57,
+      "realtime_factor": 15.6
+    },
+    "flank": {
+      "frames": 196,
+      "gen_s": 152.8,
+      "throughput_fps": 1.28,
+      "peak_vram_gb": 0.57,
+      "realtime_factor": 15.6
+    }
+  },
+  "aggregate": {
+    "clip_seconds": 9.8,
+    "mean_gen_s": 153.4,
+    "mean_realtime_factor": 15.7,
+    "peak_vram_gb": 0.57,
+    "model": "OmniControl (HumanML3D)",
+    "gpu": "RTX 2080 Ti",
+    "frames": 196
+  }
+}
